@@ -21,3 +21,4 @@ Here's what's included so far:
   * Fusion sample project and bash script to promote a project with one API from DESIGN to LIVE after developer versions project
   * Does not include connection override
   * Tested with Fusion version 1.17.0 and CLI version 1.0.0
+  * [Demo video](https://youtu.be/eOy_qFYg6GY)
