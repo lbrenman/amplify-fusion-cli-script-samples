@@ -4,6 +4,13 @@ This repo is a collection of example scripts using the [Axway Fusion CLI](https:
 
 Use for learning, demonstrations or modify for your needs.
 
+Instructions:
+* Import Fusion project zip file and configure as necessary
+* Update the shell script as necessary
+* Make script executable using `chmod +x deploy_LBclitest2_to_LIVE.sh`
+* Read the script comments and set environment variables as necessary
+* Run script `./deploy_LBclitest2_to_LIVE.sh`
+
 Here's what's included so far:
 
 * Promote Integration Project To Live Script

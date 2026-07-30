@@ -98,9 +98,6 @@ run_soft() {
 step "Logging in as ${USERNAME}"
 run "${FUSION[@]}" auth login -u "${USERNAME}" -p "${PASSWORD}" --url "${URL}"
 
-step "Switching to DESIGN"
-run "${FUSION[@]}" environment switch -n DESIGN
-
 step "Locking project (${PROJECT}) in DESIGN"
 run "${FUSION[@]}" project lock enable -n "${PROJECT}"
 
@@ -140,29 +137,28 @@ run "${FUSION[@]}" project api activate -n "${PROJECT}" -an "${API}" -cn "${DATA
 step "Unlocking project (${PROJECT}) in LIVE"
 run "${FUSION[@]}" project lock disable -n "${PROJECT}"
 
+step "Logging out"
+run "${FUSION[@]}" auth logout
+
 echo ""
 echo "==> Deployment complete: ${DEPLOYMENT_NAME}"
 
 # ==========================================================================
-# Sample successful run (VER=V4)
+# Sample successful run (VER=V6)
 # ==========================================================================
 #
-# LBrenman-MBA15:Downloads leorbrenman$ ./deploy_LBclitest2_to_LIVE.sh
+# item-ax36068:Promote API Project To Live Script leorbrenman$ ./deploy_LBclitest2_to_LIVE.sh
 # ==> Logging in as leor.brenman@gmail.com
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar auth login -u leor.brenman@gmail.com -p ******** --url https://axway-appc-se.sandbox.fusion.services.axway.com/
 # Welcome Leor Brenman GM!. You are now set to use Amplify Fusion operations.
-# ==> Switching to DESIGN
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n DESIGN
-# You are already in the same environment!!.
 # ==> Locking project (LBclitest2) in DESIGN
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project lock enable -n LBclitest2
 # Project LBclitest2 successfully locked
 # ==> Deactivating API EchoAPI in DESIGN (non-fatal)
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project api deactivate -n LBclitest2 -an EchoAPI -cn "Shared Data Plane"
-# Cannot invoke "com.axway.fusion.cli.model.Data.getId()" because "activationData" is null
-#     [warning] command exited with status 1 — continuing anyway
-# ==> Creating deployment job: LBclitest2_dj_V4
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment create -n LBclitest2_dj_V4 -d LBclitest2_dj_V4 -pv LBclitest2,V4
+# API Deactivated
+# ==> Creating deployment job: LBclitest2_dj_V6
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment create -n LBclitest2_dj_V6 -d LBclitest2_dj_V6 -pv LBclitest2,V6
 # Successfully created Deployment Job
 # ==> Unlocking project (LBclitest2) in DESIGN
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project lock disable -n LBclitest2
@@ -179,9 +175,9 @@ echo "==> Deployment complete: ${DEPLOYMENT_NAME}"
 # ==> Switching to DESIGN
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n DESIGN
 # Environment is changed to DESIGN
-# ==> Running deployment job LBclitest2_dj_V4 to LIVE
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment run -n LBclitest2_dj_V4 -e LIVE
-# Deployment Job LBclitest2_dj_V4 executed successfully.
+# ==> Running deployment job LBclitest2_dj_V6 to LIVE
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment run -n LBclitest2_dj_V6 -e LIVE
+# Deployment Job LBclitest2_dj_V6 executed successfully.
 # ==> Switching to LIVE
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n LIVE
 # Environment is changed to LIVE
@@ -191,5 +187,8 @@ echo "==> Deployment complete: ${DEPLOYMENT_NAME}"
 # ==> Unlocking project (LBclitest2) in LIVE
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project lock disable -n LBclitest2
 # Project LBclitest2 successfully unlocked
-# ==> Deployment complete: LBclitest2_dj_V4
-# LBrenman-MBA15:Downloads leorbrenman$
+# ==> Logging out
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar auth logout
+# User Brenman GM Leor is successfully logged out
+# ==> Deployment complete: LBclitest2_dj_V6
+# item-ax36068:Promote API Project To Live Script leorbrenman$

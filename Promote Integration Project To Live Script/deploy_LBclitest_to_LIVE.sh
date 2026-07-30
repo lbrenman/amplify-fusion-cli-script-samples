@@ -74,9 +74,6 @@ run() {
 step "Logging in as ${USERNAME}"
 run "${FUSION[@]}" auth login -u "${USERNAME}" -p "${PASSWORD}" --url "${URL}"
 
-step "Switching to DESIGN"
-run "${FUSION[@]}" environment switch -n DESIGN
-
 step "Deactivating project event (${PROJECT}/${FLOW})"
 run "${FUSION[@]}" project event disable -n "${PROJECT}" -in "${FLOW}" -cn "${DATA_PLANE}"
 
@@ -104,25 +101,25 @@ run "${FUSION[@]}" environment switch -n LIVE
 step "Activating project event in LIVE"
 run "${FUSION[@]}" project event enable -n "${PROJECT}" -in "${FLOW}" -cn "${DATA_PLANE}"
 
+step "Logging out"
+run "${FUSION[@]}" auth logout
+
 echo ""
 echo "==> Deployment complete: ${DEPLOYMENT_NAME}"
 
 # ==========================================================================
-# Sample successful run (VER=V67)
+# Sample successful run (VER=V69)
 # ==========================================================================
 #
-# LBrenman-MBA15:Downloads leorbrenman$ ./deploy_LBclitest_to_LIVE.sh
+# item-ax36068:Promote Integration Project To Live Script leorbrenman$ ./deploy_LBclitest_to_LIVE.sh
 # ==> Logging in as leor.brenman@gmail.com
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar auth login -u leor.brenman@gmail.com -p ******** --url https://axway-appc-se.sandbox.fusion.services.axway.com/
 # Welcome Leor Brenman GM!. You are now set to use Amplify Fusion operations.
-# ==> Switching to DESIGN
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n DESIGN
-# You are already in the same environment!!.
 # ==> Deactivating project event (LBclitest/flow1)
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project event disable -n LBclitest -in flow1 -cn "Shared Data Plane"
-# Event is not enabled for integration flow
-# ==> Creating deployment job: LBclitest_dj_V67
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment create -n LBclitest_dj_V67 -d LBclitest_dj_V67 -pv LBclitest,V67
+# Event stopped successfully.
+# ==> Creating deployment job: LBclitest_dj_V69
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment create -n LBclitest_dj_V69 -d LBclitest_dj_V69 -pv LBclitest,V69
 # Successfully created Deployment Job
 # ==> Switching to LIVE
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n LIVE
@@ -133,14 +130,17 @@ echo "==> Deployment complete: ${DEPLOYMENT_NAME}"
 # ==> Switching to DESIGN
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n DESIGN
 # Environment is changed to DESIGN
-# ==> Running deployment job LBclitest_dj_V67 to LIVE
-#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment run -n LBclitest_dj_V67 -e LIVE
-# Deployment Job LBclitest_dj_V67 executed successfully.
+# ==> Running deployment job LBclitest_dj_V69 to LIVE
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar deployment run -n LBclitest_dj_V69 -e LIVE
+# Deployment Job LBclitest_dj_V69 executed successfully.
 # ==> Switching to LIVE
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar environment switch -n LIVE
 # Environment is changed to LIVE
 # ==> Activating project event in LIVE
 #     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar project event enable -n LBclitest -in flow1 -cn "Shared Data Plane"
 # Event started successfully
-# ==> Deployment complete: LBclitest_dj_V67
-# LBrenman-MBA15:Downloads leorbrenman$
+# ==> Logging out
+#     $ java -jar /Users/leorbrenman/Downloads/fusion-cli-1.0.0-runner.jar auth logout
+# User Brenman GM Leor is successfully logged out
+# ==> Deployment complete: LBclitest_dj_V69
+# item-ax36068:Promote Integration Project To Live Script leorbrenman$
