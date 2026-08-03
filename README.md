@@ -15,7 +15,8 @@ Here's what's included so far:
 
 * Promote Integration Project To Live Script
   * Fusion sample project and bash script to promote a project with one integration from DESIGN to LIVE after developer versions project
-  * Does not include connection override
+  * Includes Connection Override
+    * Set env var's CONNECTION_USERNAME and CONNECTION_PASSWORD to activate the connection override command, leave blank to skip
   * Tested with Fusion version 1.17.0 and CLI version 1.0.0
 * Promote API Project To Live Script
   * Fusion sample project and bash script to promote a project with one API from DESIGN to LIVE after developer versions project

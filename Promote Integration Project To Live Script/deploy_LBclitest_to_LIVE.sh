@@ -9,10 +9,20 @@
 #   USERNAME  e.g. leor.brenman@gmail.com
 #   PASSWORD  your password
 #
+# Optional environment variables (BOTH must be set to take effect):
+#   CONNECTION_USERNAME
+#   CONNECTION_PASSWORD
+#   When both are set, the script imports a connection override
+#   (http_server_override.json) in LIVE, just before re-enabling the event.
+#   If either is unset/empty, the import step is skipped.
+#
 # Example:
 #   export VER=V66
 #   export USERNAME=leor.brenman@gmail.com
 #   export PASSWORD='...'
+#   # Optional — set BOTH to import the connection override:
+#   export CONNECTION_USERNAME='...'
+#   export CONNECTION_PASSWORD='...'
 #   ./deploy_LBclitest_to_LIVE.sh
 #
 # See the bottom of this file for a sample successful run.
@@ -97,6 +107,14 @@ run "${FUSION[@]}" deployment run -n "${DEPLOYMENT_NAME}" -e LIVE
 
 step "Switching to LIVE"
 run "${FUSION[@]}" environment switch -n LIVE
+
+# If BOTH connection-override credentials are set, import the override before
+# re-enabling the event. If either is missing/empty, this step is skipped.
+# (The :- default keeps `set -u` from erroring when the vars are unset.)
+if [[ -n "${CONNECTION_USERNAME:-}" && -n "${CONNECTION_PASSWORD:-}" ]]; then
+  step "Importing connection override (CONNECTION_USERNAME/PASSWORD are set)"
+  run "${FUSION[@]}" project connection override import -i http_server_override.json
+fi
 
 step "Activating project event in LIVE"
 run "${FUSION[@]}" project event enable -n "${PROJECT}" -in "${FLOW}" -cn "${DATA_PLANE}"

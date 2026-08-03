@@ -1,0 +1,37 @@
+{
+    "HTTPSEndpoint": {
+        "active": true,
+        "description": "http server",
+        "protocol": "HTTPS",
+        "partners": [
+            {}
+        ],
+        "name": "http server",
+        "client": {},
+        "details": {
+            "httpVersion": "HTTP_2",
+            "sslPublicCertificate": {},
+            "port": "9443"
+        },
+        "isSSLCertificate": false,
+        "connectionTimeoutInMS": 120000,
+        "retry": {
+            "count": 3,
+            "afterMs": 100
+        },
+        "direction": "INCOMING",
+        "authentication": {
+            "type": "BASIC",
+            "proxy_enabled": "None",
+            "password": "${CONNECTION_PASSWORD}",
+            "optional_parameters": [],
+            "usePersistentConnections": true,
+            "responseTimeout": 120000,
+            "headers": [],
+            "user": "${CONNECTION_USERNAME}"
+        }
+    },
+    "connectionName": "http server",
+    "connectionDescription": "http server",
+    "projectName": "LBclitest"
+}
